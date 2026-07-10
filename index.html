@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis 18 - FÁTIMA</title>
+    
+    <!-- Metaetiquetas Open Graph (Para la portada que aparece arriba del enlace al compartirlo) -->
+    <meta property="og:title" content="Mis 18 - FÁTIMA">
+    <meta property="og:description" content="¡Acompáñame a celebrar mi cumpleaños! Te espero en esta gran noche.">
+    <meta property="og:image" content="portadas 18 fatima.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:image:type" content="image/jpeg">
+
+    <!-- Tailwind CSS para diseño moderno y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts para tipografía elegante -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #0a1128; /* Azul marino liso y profundo */
+            color: #f4f4f9;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+        .font-elegant {
+            font-family: 'Cinzel', serif;
+        }
+        .font-cursive {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Efecto de brillo dorado */
+        .gold-glow {
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+        .gold-border {
+            border-color: #d4af37;
+        }
+        .gold-text {
+            color: #d4af37;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start pb-20 relative">
+
+    <!-- PANTALLA DE INICIO / BIENVENIDA (Permite activar la música interactiva) -->
+    <div id="welcome-screen" class="fixed inset-0 bg-[#0a1128] z-50 flex flex-col items-center justify-center p-6 text-center transition-opacity duration-1000">
+        <div class="max-w-md w-full border-2 border-[#d4af37] p-8 rounded-lg gold-glow bg-[#0f1d3a] flex flex-col items-center">
+            <h2 class="font-elegant gold-text text-xl tracking-[0.2em] mb-2">BIENVENIDO A</h2>
+            <h1 class="font-elegant text-4xl font-bold tracking-[0.1em] text-white mb-4">MIS 18 AÑOS</h1>
+            <p class="font-cursive italic gold-text text-3xl mb-8">Fátima</p>
+            <button onclick="startInvitation()" class="px-8 py-3 bg-[#d4af37] text-[#0a1128] font-bold rounded-full tracking-wider hover:bg-white hover:text-[#0a1128] transition duration-300 transform hover:scale-105 shadow-lg flex items-center gap-2">
+                <i class="fa-solid fa-envelope-open"></i> ABRIR INVITACIÓN
+            </button>
+        </div>
+    </div>
+
+    <!-- MÚSICA DE FONDO -->
+    <audio id="bg-music" loop>
+        <source src="https://raw.githubusercontent.com/lupitacontrerasruiz-lang/Mis-18-FATIMA-Invitaci-n-/main/ytmp3free.cc_aitana-superestrella-youtubemp3free.org.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <!-- CONTROLADOR DE AUDIO FLOTANTE -->
+    <div class="fixed top-4 right-4 z-40">
+        <button id="music-toggle" onclick="toggleMusic()" class="w-12 h-12 bg-[#0f1d3a] border border-[#d4af37] rounded-full flex items-center justify-center text-[#d4af37] hover:bg-[#d4af37] hover:text-[#0a1128] transition duration-300 shadow-lg">
+            <i id="music-icon" class="fa-solid fa-music text-lg"></i>
+        </button>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL DE LA INVITACIÓN -->
+    <main class="w-full max-w-2xl px-4 mt-6 flex flex-col gap-8 items-center">
+        
+        <!-- PÁGINA 1: PORTADA ORIGINAL -->
+        <section class="w-full flex flex-col items-center">
+            <div class="relative w-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-[#0f1d3a]">
+                <img 
+                    src="https://raw.githubusercontent.com/lupitacontrerasruiz-lang/Mis-18-FATIMA-Invitaci-n-/main/Cumple0.png" 
+                    alt="Portada de Invitación Fátima 18" 
+                    class="w-full h-auto object-cover block"
+                    onerror="this.src='https://placehold.co/600x800/0a1128/ffffff?text=FÁTIMA+18+AÑOS+PAGE+1'"
+                >
+            </div>
+        </section>
+
+        <!-- SECCIÓN INTERMEDIA: CUENTA REGRESIVA -->
+        <section class="w-full py-8 px-6 bg-[#0f1d3a] border-y-2 border-[#d4af37] text-center flex flex-col items-center rounded-2xl shadow-xl gold-glow my-2">
+            <h3 class="font-elegant gold-text tracking-[0.2em] text-sm uppercase mb-4">El gran día comienza en:</h3>
+            
+            <div class="grid grid-cols-4 gap-3 max-w-sm w-full">
+                <!-- DÍAS -->
+                <div class="flex flex-col items-center p-2 bg-[#0a1128] border border-[#d4af37]/30 rounded-lg">
+                    <span id="countdown-days" class="text-3xl font-bold font-elegant gold-text">00</span>
+                    <span class="text-[9px] uppercase tracking-wider text-gray-400 mt-1">Días</span>
+                </div>
+                <!-- HORAS -->
+                <div class="flex flex-col items-center p-2 bg-[#0a1128] border border-[#d4af37]/30 rounded-lg">
+                    <span id="countdown-hours" class="text-3xl font-bold font-elegant gold-text">00</span>
+                    <span class="text-[9px] uppercase tracking-wider text-gray-400 mt-1">Horas</span>
+                </div>
+                <!-- MINUTOS -->
+                <div class="flex flex-col items-center p-2 bg-[#0a1128] border border-[#d4af37]/30 rounded-lg">
+                    <span id="countdown-minutes" class="text-3xl font-bold font-elegant gold-text">00</span>
+                    <span class="text-[9px] uppercase tracking-wider text-gray-400 mt-1">Min</span>
+                </div>
+                <!-- SEGUNDOS -->
+                <div class="flex flex-col items-center p-2 bg-[#0a1128] border border-[#d4af37]/30 rounded-lg">
+                    <span id="countdown-seconds" class="text-3xl font-bold font-elegant gold-text">00</span>
+                    <span class="text-[9px] uppercase tracking-wider text-gray-400 mt-1">Seg</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PÁGINA 2: CONTENIDO E INFORMACIÓN -->
+        <section class="w-full flex flex-col items-center relative">
+            <div id="page2-container" class="relative w-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-[#0f1d3a]">
+                
+                <!-- Imagen Principal Página 2 -->
+                <img 
+                    id="page2-img"
+                    src="https://raw.githubusercontent.com/lupitacontrerasruiz-lang/Mis-18-FATIMA-Invitaci-n-/main/Cumple01%20(2).png" 
+                    alt="Detalles de Invitación Fátima 18" 
+                    class="w-full h-auto object-cover block"
+                    onerror="this.src='https://placehold.co/600x800/0a1128/ffffff?text=FÁTIMA+18+AÑOS+PAGE+2'"
+                >
+
+                <!-- BOTÓN 1: UBICACIÓN (Navy Blue con letras blancas, posicionado con tus coordenadas precisas) -->
+                <a 
+                    href="https://maps.app.goo.gl/TSp4USqkrjmYEe5W8" 
+                    target="_blank"
+                    id="btn-ubicacion"
+                    class="absolute px-5 py-2.5 bg-[#0a1128] text-white font-semibold rounded-full shadow-lg border border-white/20 flex items-center justify-center gap-2 text-xs md:text-sm tracking-wider hover:bg-[#d4af37] hover:text-[#0a1128] hover:border-[#d4af37] transition duration-300 transform hover:scale-105"
+                    style="left: 35.22%; top: 67.06%;"
+                >
+                    <i class="fa-solid fa-location-dot text-[#d4af37]"></i>
+                    <span>VER UBICACIÓN</span>
+                </a>
+
+                <!-- BOTÓN 2: CONFIRMACIÓN (Navy Blue con letras blancas, posicionado con tus coordenadas precisas) -->
+                <a 
+                    href="https://w.app/mis18fatima" 
+                    target="_blank"
+                    id="btn-confirmacion"
+                    class="absolute px-5 py-2.5 bg-[#0a1128] text-white font-semibold rounded-full shadow-lg border border-white/20 flex items-center justify-center gap-2 text-xs md:text-sm tracking-wider hover:bg-[#d4af37] hover:text-[#0a1128] hover:border-[#d4af37] transition duration-300 transform hover:scale-105"
+                    style="left: 37.24%; top: 84.24%;"
+                >
+                    <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+                    <span>CONFIRMAR</span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- MANEJO DE AUDIO & PANTALLA INICIAL ---
+        const audio = document.getElementById('bg-music');
+        const musicIcon = document.getElementById('music-icon');
+        const welcomeScreen = document.getElementById('welcome-screen');
+
+        function startInvitation() {
+            welcomeScreen.classList.add('opacity-0');
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+            }, 1000);
+            
+            playMusic();
+        }
+
+        function playMusic() {
+            audio.play().then(() => {
+                musicIcon.className = "fa-solid fa-pause text-lg";
+            }).catch(e => {
+                console.log("Autoplay bloqueado por el navegador.");
+            });
+        }
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                musicIcon.className = "fa-solid fa-pause text-lg";
+            } else {
+                audio.pause();
+                musicIcon.className = "fa-solid fa-music text-lg";
+            }
+        }
+
+        // --- CUENTA REGRESIVA ---
+        // Del 9 de Julio a las 7:05 PM al 25 de Julio a las 4:00 PM (16:00:00)
+        const targetDate = new Date("July 25, 2026 16:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference <= 0) {
+                document.getElementById('countdown-days').innerText = "00";
+                document.getElementById('countdown-hours').innerText = "00";
+                document.getElementById('countdown-minutes').innerText = "00";
+                document.getElementById('countdown-seconds').innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown-days').innerText = String(days).padStart(2, '0');
+            document.getElementById('countdown-hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('countdown-minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('countdown-seconds').innerText = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
